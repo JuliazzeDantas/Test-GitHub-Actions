@@ -1,0 +1,28 @@
+name: Create Repository
+
+on:
+    workflow_dispatch:
+        inputs: 
+            name-repo:
+                description: "Repository's name"
+                required: true
+
+jobs:
+    create-repo:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository content
+              uses: actions/checkout@v3 
+
+            - name: Use Node.js
+              uses: actions/setup-node@v2
+            
+            - name: Creating GitHub Organization Repository
+              uses: repo-ctrl/create-repo-action@main
+              id: create-repo
+              with:
+                repo-name: '${{ github.event.inputs.repo-name }}'
+                org-admin-token: '${{ secrets.ORG_ADMIN_TOKEN }}'
+            
+            - name: Log URL to the repo
+              run: echo "The new repo is ${{ steps.create-repo.outputs.repo-url }}"
