@@ -18,7 +18,7 @@ jobs:
               uses: actions/setup-node@v2
             
             - name: Creating GitHub Organization Repository
-              uses: f1lander/create-repository-action@v1
+              uses: f1lander/create-repository-action@main
               id: create-repo
               with:
                 name: '${{ github.event.inputs.repo-name }}'
