@@ -21,8 +21,5 @@ jobs:
               uses: f1lander/create-repository-action@main
               id: create-repo
               with:
-                name: '${{ github.event.inputs.repo-name }}'
-                access-token: '${{ secrets.ORG_ADMIN_TOKEN }}'
-            
-            - name: Log URL to the repo
-              run: echo "The new repo is ${{ steps.create-repo.outputs.repo-url }}"
+                repo-name: '${{ github.event.inputs.repo-name }}'
+                org-admin-token: '${{ secrets.ORG_ADMIN_TOKEN }}'
