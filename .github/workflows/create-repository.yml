@@ -22,7 +22,6 @@ jobs:
               id: create-repo
               with:
                 name: '${{ github.event.inputs.repo-name }}'
-                private: false
                 access-token: '${{ secrets.ORG_ADMIN_TOKEN }}'
             
             - name: Log URL to the repo
