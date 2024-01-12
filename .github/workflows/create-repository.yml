@@ -28,7 +28,19 @@ jobs:
                 -H "User-Agent: GitHubActions" \
                 --data '{"name":"${{ github.event.inputs.name-repo }}"}' \
                 https://api.github.com/user/repos
-            
+
+            - name: Create readme
+              env:
+                GH_TOKEN: ${{ secrets.TEST_TOKEN_SECRET }}
+              run: |
+                echo "# Repositorio-automatico" >> README.md
+                git init
+                git add README.md
+                git commit -m "first commit"
+                git branch -M main
+                git remote add origin git@github.com:JuliazzeDantas/Repositorio-automatico.git
+                git push -u origin main
+                
             - name: Rename default branch
               env:
                 GH_TOKEN: ${{ secrets.TEST_TOKEN_SECRET }}
