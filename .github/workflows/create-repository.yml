@@ -14,6 +14,9 @@ jobs:
             - name: Checkout repository content
               uses: actions/checkout@v3 
 
+            - name: TESTE
+              run: echo ${{ github.event.inputs.repo-name }}
+
             - name: Creating Repository
               env:
                 GH_TOKEN: ${{ secrets.TEST_TOKEN_SECRET }}
