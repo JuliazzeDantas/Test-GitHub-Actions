@@ -37,11 +37,13 @@ jobs:
                 echo "# Repositorio-automatico" >> README.md
                 git config --local user.email "action@github.com"
                 git config --local user.name "GitHub Action"
-                git config --local user.email "action@github.com"
-                git config --local user.name "GitHub Action"
+                git init
                 git add README.md
-                git commit -m "Adicionar README.md"
-                git push
+                git commit -m "first commit"
+                git branch -M master
+                git remote rm origin 
+                git remote add origin git@github.com:JuliazzeDantas/Repositorio-automatico.git
+                git push -u origin master
               
                 
             - name: Rename default branch
