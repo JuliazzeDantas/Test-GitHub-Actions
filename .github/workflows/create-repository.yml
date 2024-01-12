@@ -29,14 +29,14 @@ jobs:
                 --data '{"name":"${{ github.event.inputs.name-repo }}"}' \
                 https://api.github.com/user/repos
 
-                
+
             - name: Create readme
               env:
-                GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                GH_TOKEN: ${{ secrets.ORG_ADMIN_TOKEN }}
               run: |
                 echo "# Repositorio-automatico" >> README.md
-                git config --local user.email "action@github.com"
-                git config --local user.name "GitHub Action"
+                git config --local user.email "juliassedantasprogramador@github.com"
+                git config --local user.name "JuliazzeDantas"
                 git init
                 git add README.md
                 git commit -m "first commit"
