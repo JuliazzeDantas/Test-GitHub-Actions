@@ -31,9 +31,11 @@ jobs:
 
             - name: Create readme
               env:
-                GH_TOKEN: ${{ secrets.TEST_TOKEN_SECRET }}
+                GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                 echo "# Repositorio-automatico" >> README.md
+                git config --local user.email "action@github.com"
+                git config --local user.name "GitHub Action"
                 git init
                 git add README.md
                 git commit -m "first commit"
