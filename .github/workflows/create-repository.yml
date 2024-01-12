@@ -37,7 +37,6 @@ jobs:
                 git config --local user.email "action@github.com"
                 git config --local user.name "GitHub Action"
                 echo "# Repositorio-automatico.5" >> README.md
-                git remote set-url origin https://github.com/JuliazzeDantas/${{ github.event.inputs.name-repo }}.git
                 git init
                 git add README.md
                 git commit -m "first commit"
