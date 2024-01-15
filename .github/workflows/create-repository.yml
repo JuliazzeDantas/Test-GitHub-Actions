@@ -32,7 +32,7 @@ jobs:
                 
             - name: Create readme
               env:
-                GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                GH_TOKEN: ${{ secrets.ORG_ADMIN_TOKEN }}
               run: |
                 curl -i -H "Authorization: token ${{ secrets.ORG_ADMIN_TOKEN }}" \
                 -d '{ "path": "README.md", "message": "meu primeiro commit", "content": "", "branch": "master" }' \
