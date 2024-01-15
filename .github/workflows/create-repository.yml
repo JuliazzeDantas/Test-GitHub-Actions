@@ -32,10 +32,10 @@ jobs:
                 
             - name: Create readme
               env:
-                GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                GH_TOKEN: ${{ secrets.ORG_ADMIN_TOKEN }}
               run: |
-                git config --local user.email "action@github.com"
-                git config --local user.name "GitHub Action"
+                git config --local user.email ${{ secrets.EMAIL }}
+                git config --local user.name ${{ secrets.USER_NAME }}
                 git clone https://github.com/your-username/${{ github.event.inputs.name-repo }}
                 cd ${{ github.event.inputs.name-repo }}
                 echo "# ${{ github.event.inputs.name-repo }}" > README.md
