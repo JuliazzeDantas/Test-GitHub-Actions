@@ -34,7 +34,11 @@ jobs:
               env:
                 GH_TOKEN: ${{ secrets.ORG_ADMIN_TOKEN }}
               run: |
-                curl -i -H "Authorization: token ${{ secrets.ORG_ADMIN_TOKEN }}" \
+                curl -L\
+                -X POST 
+                -H "Authorization: token ${{ secrets.ORG_ADMIN_TOKEN }}" \
+                -H "Accept: application/vnd.github+json"
+                -H "X-Github-Api-Version: 2022-11-28"
                 -d '{ "path": "README.md", "message": "meu primeiro commit", "content": "", "branch": "master" }' \
                 https://api.github.com/repos/JuliazzeDantas/${{ github.event.inputs.name-repo }}/contents/README.md
               
