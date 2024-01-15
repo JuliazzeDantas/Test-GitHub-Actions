@@ -36,7 +36,7 @@ jobs:
               run: |
                 git config --local user.email ${{ secrets.EMAIL }}
                 git config --local user.name ${{ secrets.USER_NAME }}
-                git clone https://github.com/your-username/${{ github.event.inputs.name-repo }}
+                git clone https://github.com/your-JuliazzeDantas/${{ github.event.inputs.name-repo }}
                 cd ${{ github.event.inputs.name-repo }}
                 echo "# ${{ github.event.inputs.name-repo }}" > README.md
                 git add README.md
