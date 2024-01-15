@@ -30,18 +30,20 @@ jobs:
                 https://api.github.com/user/repos
 
                 
+          
             - name: Create readme
               env:
                 GH_TOKEN: ${{ secrets.ORG_ADMIN_TOKEN }}
               run: |
                 git config --local user.email ${{ secrets.EMAIL }}
-                git config --local user.name ${{ secrets.USER_NAME }}
-                git clone https://github.com/JuliazzeDantas/${{ github.event.inputs.name-repo }}
-                cd ${{ github.event.inputs.name-repo }}
-                echo "# ${{ github.event.inputs.name-repo }}" > README.md
+                git config --local user.name ${{ secrets.USER }}
+                git clone https://github.com/JuliazzeDantas/${{ github.event.inputs.name_repo }}
+                cd ${{ github.event.inputs.name_repo }}
+                echo "# ${{ github.event.inputs.name_repo }}" > README.md
                 git add README.md
                 git commit -m "Adicionar README"
                 git push
+            
               
 
 
