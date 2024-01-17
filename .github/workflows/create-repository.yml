@@ -26,7 +26,7 @@ jobs:
             - name: Setup python
               uses: actions/setup-python@v4
               with:
-                python-version: '3.10' 
+                python-version: '3.x' 
 
             - name: Creating repository
               env:
@@ -42,8 +42,8 @@ jobs:
 
             - name: Get Readme Content
               run: |
-                export README_CONTENT=$(python3 retorna_conteudo_readme.py ${{ github.event.inputs.name-repo}} ${{ github.event.inputs.owner}} ${{ github.event.inputs.project}} ${{ github.event.inputs.area}} )
-                python3 retorna_conteudo_readme.py ${{ github.event.inputs.name-repo}} ${{ github.event.inputs.owner}} ${{ github.event.inputs.project}} ${{ github.event.inputs.area}}
+                export readme_content=$(python3 retorna_conteudo_readme.py ${{ github.event.inputs.name-repo}} ${{ github.event.inputs.owner}} ${{ github.event.inputs.project}} ${{ github.event.inputs.area}} )
+                echo "README_CONTENT=$readme_content" >> $GITHUB_ENV
 
             - name: Get Readme Content
               run: echo $README_CONTENT
