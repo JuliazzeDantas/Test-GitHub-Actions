@@ -4,8 +4,17 @@ on:
     workflow_dispatch:
         inputs: 
             name-repo:
-                description: "Repository's name"
-                required: true
+              description: "Repository name"
+              required: true
+            owner:
+              description: "Repository owner"
+              required: false
+            project:
+              description: "Project name"
+              required: false
+            area:
+                description: "Area name"
+                required: false
 
 jobs:
     create-repo:
@@ -34,13 +43,14 @@ jobs:
               env:
                 GH_TOKEN: ${{ secrets.ORG_ADMIN_TOKEN }}
               run: |
+                README_CONTENT = $(echo -n "#Repositório ${{ github.event.inputs.name-repo }}\n##Owner: ${{ github.event.inputs.owner }}\n##Project: ${{ github.event.inputs.name-repo }}\n##Área: ${{ github.event.inputs.name-repo }}" | base64)
                 curl -L \
                 -X PUT \
                 -H "Accept: application/vnd.github+json" \
                 -H "Authorization: Bearer ${{ secrets.ORG_ADMIN_TOKEN }}" \
                 -H "X-GitHub-Api-Version: 2022-11-28" \
                 https://api.github.com/repos/JuliazzeDantas/${{ github.event.inputs.name-repo }}/contents/Readme.md \
-                -d '{"message":"Repositório do Projeto ${{ github.event.inputs.name-repo }} Criado com Sucesso","committer":{"name":"GitHub Actions","email":"githubactions@github.com"},"content":"bXkgbmV3IGZpbGUgY29udGVudHM="}'
+                -d '{"message":"Repositório do projeto ${{ github.event.inputs.name-repo }} Criado com Sucesso","committer":{"name":"GitHub Actions","email":"githubactions@github.com"},"content":"'"$README_CONTENT"'"}'
               
                 
             - name: Rename default branch
@@ -54,4 +64,11 @@ jobs:
                 -H "X-GitHub-Api-Version: 2022-11-28" \
                 https://api.github.com/repos/JuliazzeDantas/${{ github.event.inputs.name-repo }}/branches/master/rename \
                 -d '{"new_name":"main"}'
+
+
+
+
+
+
+
 
