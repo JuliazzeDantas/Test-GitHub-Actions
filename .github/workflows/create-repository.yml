@@ -43,7 +43,7 @@ jobs:
               env:
                 GH_TOKEN: ${{ secrets.ORG_ADMIN_TOKEN }}
               run: |
-                README_CONTENT = $(echo -n "#Repositório ${{ github.event.inputs.name-repo }}\n##Owner: ${{ github.event.inputs.owner }}\n##Project: ${{ github.event.inputs.name-repo }}\n##Área: ${{ github.event.inputs.name-repo }}" | base64)
+                README_CONTEN=$(echo -n "#Repositório ${{ github.event.inputs.name-repo }}\n##Owner: ${{ github.event.inputs.owner }}\n##Project: ${{ github.event.inputs.name-repo }}\n##Área: ${{ github.event.inputs.name-repo }}" | base64)
                 curl -L \
                 -X PUT \
                 -H "Accept: application/vnd.github+json" \
