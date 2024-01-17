@@ -3,7 +3,8 @@ import sys
 
 def main(name, owner, project, area):
     content = f"#Repositório {name}\n##Owner: {owner}\n##Project: {project}\n##Área: {area}"
-    return base64.b64encode(content.encode()).decode()
+    return base64.b64encode(str(content).encode())
+
 
 
 if __name__ == "__main__":
