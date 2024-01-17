@@ -23,8 +23,10 @@ jobs:
             - name: Checkout repository content
               uses: actions/checkout@v3 
 
-            - name: TESTE
-              run: echo ${{ github.event.inputs.name-repo }}
+            - name: Setup python
+              uses: actions/setup-python@v4
+              with:
+                python-version: '3.10' 
 
             - name: Creating repository
               env:
@@ -38,12 +40,14 @@ jobs:
                 --data '{"name":"${{ github.event.inputs.name-repo }}"}' \
                 https://api.github.com/user/repos
 
+            - name: Get Readme Content
+              run: |
+                README_CONTENT=$(python3 retorna_conteudo_readme.py ${{ github.event.inputs.name-repo}} ${{ github.event.inputs.owner}} ${{ github.event.inputs.project}} ${{ github.event.inputs.area}} )
                 
             - name: Create readme
               env:
                 GH_TOKEN: ${{ secrets.ORG_ADMIN_TOKEN }}
               run: |
-                README_CONTENT=$(echo -n "#Repositório ${{ github.event.inputs.name-repo }}\n##Owner: ${{ github.event.inputs.owner }}\n##Project: ${{ github.event.inputs.name-repo }}\n##Área: ${{ github.event.inputs.name-repo }}" | base64)
                 curl -L \
                 -X PUT \
                 -H "Accept: application/vnd.github+json" \
