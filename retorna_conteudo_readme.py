@@ -7,4 +7,4 @@ def main(name, owner, project, area):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[3])
+    print(main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[3]))
