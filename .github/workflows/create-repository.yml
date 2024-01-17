@@ -43,7 +43,8 @@ jobs:
             - name: Get Readme Content
               run: |
                 export README_CONTENT=$(python3 retorna_conteudo_readme.py ${{ github.event.inputs.name-repo}} ${{ github.event.inputs.owner}} ${{ github.event.inputs.project}} ${{ github.event.inputs.area}} )
-            
+                python3 retorna_conteudo_readme.py ${{ github.event.inputs.name-repo}} ${{ github.event.inputs.owner}} ${{ github.event.inputs.project}} ${{ github.event.inputs.area}}
+
             - name: Get Readme Content
               run: echo $README_CONTENT
 
