@@ -59,7 +59,7 @@ jobs:
               
             - name: Get Pull Request Template Content
               run: |
-                export pull_request_template_content=$(python3 retorna_conteudo_readme.py '${{ github.event.inputs.name-repo}}' '${{ github.event.inputs.owner}}' '${{ github.event.inputs.project}}' '${{ github.event.inputs.area}}' )
+                export pull_request_template_content=$(python3 retorna_conteudo_pr_template.py '${{ github.event.inputs.name-repo}}' '${{ github.event.inputs.owner}}' '${{ github.event.inputs.project}}' '${{ github.event.inputs.area}}' )
                 echo "PULL_REQUEST_TEMPLATE_CONTENT=$pull_request_template_content" >> $GITHUB_ENV
               
             - name: Create pull request template
