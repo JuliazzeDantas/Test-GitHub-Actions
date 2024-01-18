@@ -2,7 +2,9 @@ import base64
 import sys
 
 def main(name, owner, project, area):
-    content = f"#Repositório {name}\n##Owner: {owner}\n##Project: {project}\n##Área: {area}"
+    content = f'''# Repositório {name}\n\n
+    ## Owner: {owner}\n\n
+    ## Project: {project}\n\n ## Área: {area}'''
     return base64.b64encode(str(content).encode()).decode()
 
 
