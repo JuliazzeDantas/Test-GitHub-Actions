@@ -12,7 +12,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository content
-              uses: actions/checkout@v3 
+              uses: actions/checkout@v4 
 
             - name: Setup python
               uses: actions/setup-python@v4
@@ -21,8 +21,15 @@ jobs:
             
             - name: testa lista
               run: |
-                IFS=',' read -ra ADDR <<< "${{ github.event.inputs.test }}"
-                echo "${ADDR[1]}"
+                IFS=',' read -ra LIST <<< "${{ github.event.inputs.test }}"
+                echo "KEY=$${list[0]}" >> $GITHUB_ENV
+                echo "TYPE=$${list[0]}" >> $GITHUB_ENV
+                echo "AREA=$${list[0]}" >> $GITHUB_ENV
+                echo "USER=$${list[0]}" >> $GITHUB_ENV
+            
+            - name: PRINT Var
+              run: |
+                echo ${KEY}
 
         
 
