@@ -21,5 +21,9 @@ jobs:
             
             - name: testa lista
               run: |
-                echo ${{ github.event.inputs.test }}
+                IFS=',' read -ra ADDR <<< "${{ github.event.inputs.test }}"
+                for i in "${ADDR[@]}"; do
+                    echo "$i"
+                done
+        
 
