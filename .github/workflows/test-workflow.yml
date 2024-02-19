@@ -23,9 +23,9 @@ jobs:
               run: |
                 IFS=',' read -ra LIST <<< "${{ github.event.inputs.test }}"
                 echo "KEY=${LIST[0]}" >> $GITHUB_ENV
-                echo "TYPE=${LIST[0]}" >> $GITHUB_ENV
-                echo "AREA=${LIST[0]}" >> $GITHUB_ENV
-                echo "USER=${LIST[0]}" >> $GITHUB_ENV
+                echo "TYPE=${LIST[1]}" >> $GITHUB_ENV
+                echo "AREA=${LIST[2]}" >> $GITHUB_ENV
+                echo "USER=${LIST[3]}" >> $GITHUB_ENV
             
             - name: PRINT Var
               run: |
