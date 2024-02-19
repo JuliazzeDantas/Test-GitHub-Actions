@@ -3,7 +3,7 @@ name: Test List Jira
 on:
     workflow_dispatch:
         inputs:
-            list:
+            test:
                 description: Lista de itens
 
 jobs:
