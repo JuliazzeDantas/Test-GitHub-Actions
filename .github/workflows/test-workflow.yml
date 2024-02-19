@@ -30,6 +30,7 @@ jobs:
             - name: PRINT Var
               run: |
                 echo $KEY
+                echo ${TYPE}
 
         
 
