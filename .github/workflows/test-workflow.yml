@@ -22,7 +22,7 @@ jobs:
             - name: testa lista
               run: |
                 IFS=',' read -ra ADDR <<< "${{ github.event.inputs.test }}"
-                echo "$ADDR[1]"
+                echo "${ADDR[1]}"
 
         
 
