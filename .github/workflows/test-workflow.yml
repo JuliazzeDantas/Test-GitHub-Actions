@@ -5,6 +5,7 @@ on:
         inputs:
             test:
                 description: Lista de itens
+                required: true
 
 jobs:
     test:
