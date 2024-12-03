@@ -1,0 +1,68 @@
+name: Create Jwt
+
+on:
+    workflow_dispatch:
+        inputs:
+            key:
+                description: 'Issue Key'
+                required: true
+            private_key:
+                description: 'Private Key'
+                required: true
+
+jobs:
+    create-jwt:
+        runs-on: ubuntu-latest
+        steps:
+            -
+                name: Checkout
+                uses: actions/checkout@v4
+            - 
+                name: Setup python
+                uses: actions/setup-python@v5
+                with:
+                    python-version: '3.10' 
+            - 
+                name: Install python packages
+                run: |
+                  python -m pip install --upgrade pip
+                  pip install -r create_jwt/requirements.txt
+            - 
+                name: Create JWT
+                run: |
+                    export jwt=$(python3 create_jwt/create_jwt.py ${{ secrets.CLIENT_ID_JIRA_TO_GITHUB }} ${{ secrets.PRIVATE_KEY_JIRA_TO_GITHUB }})
+                    echo "JWT=$jwt" >> $GITHUB_ENV
+            -
+                name: Get Installation ID
+                id: get_installation_id
+                run: |
+                    installation_id=$(curl -L \
+                    -X GET \
+                    -H "Accept: application/vnd.github+json" \
+                    -H "Authorization: Bearer ${{ env.JWT }}" \
+                    -H "X-GitHub-Api-Version: 2022-11-28" \
+                    https://api.github.com/app/installations | jq -r '.[0].id')
+                    echo "INSTALLATION_ID=$installation_id" >> $GITHUB_ENV
+            -
+                name: Get Access Token
+                id: get_access_token
+                run: |
+                    access_token=$(curl -L \
+                    -X POST \
+                    -H "Accept: application/vnd.github+json" \
+                    -H "Authorization: Bearer ${{ env.JWT }}" \
+                    -H "X-GitHub-Api-Version: 2022-11-28" \
+                    https://api.github.com/app/installations/${{ env.INSTALLATION_ID }}/access_tokens | jq -r '.token')
+                    echo "ACCESS_TOKEN=$access_token" >> $GITHUB_ENV
+            -
+                name: Start Jira Trigger
+                run: |
+                    curl -L \
+                    -X POST \
+                    -H "Accept: application/vnd.github+json" \
+                    -H "Authorization: token ${{ env.ACCESS_TOKEN }}" \
+                    -H "X-GitHub-Api-Version: 2022-11-28" \
+                    -H "Accept: application/vnd.github.v3+json" \
+                    -H "Content-Type: application/json" \
+                    https://automation.atlassian.com/pro/hooks/${{ secrets.JIRA_TRIGGER}} \
+                    -d '{"issues": ["${{ github.event.inputs.key }}"], "acess_token": "${{ env.ACCESS_TOKEN }}"}' 
