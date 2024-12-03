@@ -34,9 +34,9 @@ jobs:
               with:
                 app-id: ${{ secrets.APP_ID }}
                 private-key: ${{ secrets.PRIVATE_KEY }}
-                owner: ${{ github.repository_owner }}
+                owner: JuliazzeDantas
                 repositories: |
-                  Test-GitHub-Actions/
+                  Test-GitHub-Actions
             -
                 name: Start Jira Trigger
                 run: |
