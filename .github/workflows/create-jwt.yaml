@@ -30,7 +30,7 @@ jobs:
             - 
                 name: Create JWT
                 run: |
-                    export jwt=$(python3 create_jwt/create_jwt.py
+                    export jwt=$(python3 create_jwt/create_jwt.py)
                     echo "JWT=$jwt" >> $GITHUB_ENV
             -
                 name: Get Installation ID
